@@ -41,6 +41,7 @@ public class PlayerList
         if(!draftMode) {
             listOfPlayers.add(new Player(name));
             sendMessage(" has been added!", event);
+            displayPlayers(event);
         }
         else {
             sendMessage("Draft mode already started, cannot add players. \n" +
@@ -423,14 +424,18 @@ public class PlayerList
     }
     public void runTest(GuildMessageReceivedEvent event)
     {
+        emptyCommand(event);
         String playerName;
         for(int i = 1; i <= 10; i ++)
         {
             playerName = "player" + i;
-            this.listOfPlayers.add(new Player(playerName));
-            //addPlayers(playerName,event);
+            //this.listOfPlayers.add(new Player(playerName));
+            addPlayers(playerName,event);
         }
-        /*
+        removePlayer("1",event);
+        removePlayer("6", event);
+        addPlayers("player1", event);
+        addPlayers("planer6", event);
         startDraft(event);
         nominate("1",event);
         nominate("1", event);
@@ -441,8 +446,6 @@ public class PlayerList
             pickPlayer(Integer.toString(nextInt), event);
         }
         displayPlayers(event);
-
-         */
     }
 
     /*
