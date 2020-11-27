@@ -10,12 +10,19 @@ import javax.security.auth.login.LoginException;
 public class DraftBot
 {
     private final JDA jda;
-    public DraftBot() throws LoginException
+    public DraftBot(String[] args) throws LoginException
     {
-        //  Must place token_id 
-        this.jda = new JDABuilder(AccountType.BOT).setToken("PLACE_TOKEN_ID").build();
-        this.jda.getPresence().setStatus(OnlineStatus.ONLINE);
-        this.jda.addEventListener(new Commands());
+        String devArgument;
+        if(args.length > 1){
+            devArgument = args[1];
+        }
+        else{
+            devArgument = "";
+        }
+        this.jda = JDABuilder.createLight(args[0])
+                .addEventListeners(new Commands(devArgument))
+                .setStatus(OnlineStatus.ONLINE)
+                .build();
     }
 
 }
